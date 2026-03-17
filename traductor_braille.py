@@ -43,7 +43,34 @@ def texto_a_braille(texto):
     return f"En Braille:\n{fila_braille}\n{fila_letras}"
 
 
-#Función de braille a texto
+def braille_a_texto(entrada_braille):
+    tokens = entrada_braille.strip().split(' ')
+    resultado = ''
+    en_numero = False
+
+    for token in tokens:
+        if token == '':
+            resultado += ' '
+            en_numero = False
+            continue
+
+        if token == PREFIJO_NUMERO:
+            en_numero = True
+            continue
+
+        if en_numero:
+            digito = braille_a_digito.get(token)
+            if digito:
+                resultado += digito
+            else:
+                en_numero = False
+                letra = braille_a_letra.get(token, '?')
+                resultado += letra
+        else:
+            letra = braille_a_letra.get(token, '?')
+            resultado += letra
+
+    return f"Texto traducido:\n{resultado}"
 
 
 # ====== Menú Principal ====
