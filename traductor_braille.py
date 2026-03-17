@@ -85,7 +85,10 @@ if opcion == '1':
     archivo_salida = "traduccion.txt"
 
 elif opcion == '2':
-    print("Pega el texto en Braille (simbolos separados por espacios):")
+    print("Pega el texto en Braille (símbolos separados por espacios):")
+    entrada = input()                      # ← recibe la entrada
+    resultado = braille_a_texto(entrada)   # ← llama a la nueva función
+    archivo_salida = "traduccion.txt"      # ← habilita el guardado
 
 else:
     resultado = "Opcion no valida"
