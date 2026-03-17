@@ -50,7 +50,8 @@ def braille_a_texto(entrada_braille):
 
     for token in tokens:
         if token == '':
-            resultado += ' '
+            if resultado and resultado[-1] != ' ':  #evita espacios dobles
+                resultado += ' '
             en_numero = False
             continue
 
