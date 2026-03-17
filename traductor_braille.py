@@ -16,6 +16,10 @@ numeros = {
 #Prefijo para diferenciar un numero
 PREFIJO_NUMERO = '⠼'
 
+# AÑADIR después de la línea de PREFIJO_NUMERO
+braille_a_letra  = {v: k for k, v in braille.items()}
+braille_a_digito = {v: k for k, v in numeros.items()}
+
 #Función de texto a braille
 def texto_a_braille(texto):
     fila_braille = ''
