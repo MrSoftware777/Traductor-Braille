@@ -29,7 +29,7 @@ def texto_a_braille(texto):
     for letra in texto.lower():
         if letra.isdigit():
             if not en_numero:
-                fila_braille += PREFIJO_NUMERO
+                fila_braille += PREFIJO_NUMERO + ' ' 
                 en_numero = True
             fila_braille += numeros[letra] + ' '
             fila_letras += letra + ' '
