@@ -7,9 +7,8 @@ braille = {
     'p': '⠏', 'q': '⠟', 'r': '⠗', 's': '⠎', 't': '⠞',
     'u': '⠥', 'v': '⠧', 'w': '⠺', 'x': '⠭', 'y': '⠽',
     'z': '⠵', ' ': ' ',
-    '1': '⠁', '2': '⠃', '3': '⠉', '4': '⠙', '5': '⠑',
-    '6': '⠋', '7': '⠛', '8': '⠓', '9': '⠊', '0': '⠚',
 }
+
 # Diccionario de números
 numeros = {
     '1': '⠁', '2': '⠃', '3': '⠉', '4': '⠙', '5': '⠑',
@@ -18,6 +17,10 @@ numeros = {
 
 #Prefijo para diferenciar un numero
 PREFIJO_NUMERO = '⠼'
+
+# AÑADIR después de la línea de PREFIJO_NUMERO
+braille_a_letra  = {v: k for k, v in braille.items()}
+braille_a_digito = {v: k for k, v in numeros.items()}
 
 #Función de texto a braille
 def texto_a_braille(texto):
@@ -28,7 +31,7 @@ def texto_a_braille(texto):
     for letra in texto.lower():
         if letra.isdigit():
             if not en_numero:
-                fila_braille += PREFIJO_NUMERO
+                fila_braille += PREFIJO_NUMERO + ' ' 
                 en_numero = True
             fila_braille += numeros[letra] + ' '
             fila_letras += letra + ' '
@@ -42,7 +45,35 @@ def texto_a_braille(texto):
     return f"En Braille:\n{fila_braille}\n{fila_letras}"
 
 
-#Función de braille a texto
+def braille_a_texto(entrada_braille):
+    tokens = entrada_braille.strip().split(' ')
+    resultado = ''
+    en_numero = False
+
+    for token in tokens:
+        if token == '':
+            if resultado and resultado[-1] != ' ':  #evita espacios dobles
+                resultado += ' '
+            en_numero = False
+            continue
+
+        if token == PREFIJO_NUMERO:
+            en_numero = True
+            continue
+
+        if en_numero:
+            digito = braille_a_digito.get(token)
+            if digito:
+                resultado += digito
+            else:
+                en_numero = False
+                letra = braille_a_letra.get(token, '?')
+                resultado += letra
+        else:
+            letra = braille_a_letra.get(token, '?')
+            resultado += letra
+
+    return f"Texto traducido:\n{resultado}"
 
 
 # ====== Menú Principal ====
@@ -57,7 +88,10 @@ if opcion == '1':
     archivo_salida = "traduccion.txt"
 
 elif opcion == '2':
-    print("Pega el texto en Braille (simbolos separados por espacios):")
+    print("Pega el texto en Braille (símbolos separados por espacios):")
+    entrada = input()                      # ← recibe la entrada
+    resultado = braille_a_texto(entrada)   # ← llama a la nueva función
+    archivo_salida = "traduccion.txt"      # ← habilita el guardado
 
 else:
     resultado = "Opcion no valida"
