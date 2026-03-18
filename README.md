@@ -119,11 +119,14 @@ Traductor-Braille/
 ## 👥 Autores
 
 | Usuario | Rol |
-|---|---|
-| [@MrSoftware777](https://github.com/MrSoftware777) | Creador y mantenedor |
-| [@BraSanchez](https://github.com/BraSanchez) | Colaborador |
-| [@Yarisa-crypto](https://github.com/Yarisa-crypto) | Colaborador |
-| [@EnmanuelVelasquez](https://github.com/EnmanuelVelasquez) | Colaborador |
+Autores: 
+- Luis Fernando Zapata
+- Brandon Mosquera
+- Camilo Chavarro
+
+Editores:
+- Yefri Ariza
+- Enmanuel Velasquez Romero
 
 ---
 
