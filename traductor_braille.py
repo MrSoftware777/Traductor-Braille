@@ -47,9 +47,11 @@ def texto_a_braille(texto):
 
 
 def braille_a_texto():
-    # Lee directamente desde el archivo generado por texto_a_braille
-    with open("traduccion.txt", "r", encoding="utf-8") as archivo:
-        entrada_braille = archivo.read()
+    try:
+        with open("traduccion.txt", "r", encoding="utf-8") as archivo:
+            entrada_braille = archivo.read()
+    except FileNotFoundError:
+        return "No se encontró ninguna traducción. Primero traduce un texto a Braille."
 
     tokens = entrada_braille.strip().split(' ')
     resultado = ''
